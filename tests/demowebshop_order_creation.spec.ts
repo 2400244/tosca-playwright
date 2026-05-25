@@ -54,30 +54,31 @@ test.describe('DemoWebShop_Order_Creation|Buiseness Parameters|RTB', () => {
     await expect(page.locator('div.page-title')).toBeVisible();
 
     // WebShop | Billing Address - Click on continue button
-    await page.locator('input.button-1.new-address-next-step-button').click();
+    await page.getByRole('button', { name: 'Continue' }).click();
     await page.waitForLoadState('networkidle');
 
     // WebShop | Shipping Address - Click on continue button
-    await page.locator('input.button-1.new-address-next-step-button').click();
+    await page.getByRole('button', { name: 'Continue' }).click();
     await page.waitForLoadState('networkidle');
 
     // WebShop | Shipping Method - Click on continue button
-    await page.locator('input.button-1.shipping-method-next-step-button').click();
+    await page.getByRole('button', { name: 'Continue' }).click();
     await page.waitForLoadState('networkidle');
 
-    // WebShop | Payment Method - Click on continue button
-    await page.locator('input.button-1.payment-method-next-step-button').click();
+    // WebShop | Payment Method - Select Credit Card and click on continue button
+    await page.locator('input#paymentmethod_2').check();
+    await page.getByRole('button', { name: 'Continue' }).click();
     await page.waitForLoadState('networkidle');
 
     // WebShop | Payment Information - Click on continue button
-    await page.locator('input.button-1.payment-info-next-step-button').click();
+    await page.getByRole('button', { name: 'Continue' }).click();
     await page.waitForLoadState('networkidle');
 
     // WebShop | Confirm Order - Click on confirm button
-    await page.locator('input.button-1.confirm-order-next-step-button').click();
+    await page.getByRole('button', { name: 'Confirm' }).click();
     await page.waitForLoadState('networkidle');
 
-    // WebShop | Order Confirmation - Verify order completion
+    // WebShop | Order Completion - Verify order completion
     await expect(page.locator('div.title')).toContainText('Your order has been successfully processed!');
   });
 });
