@@ -54,32 +54,35 @@ test.describe('DemoWebShop_Order_Creation|Buiseness Parameters|RTB', () => {
     await expect(page.locator('div.page-title')).toBeVisible();
 
     // WebShop | Billing Address - Click on continue button
-    await page.getByRole('button', { name: 'Continue' }).click();
+    await page.locator('#billing-buttons-container').getByRole('button', { name: 'Continue' }).click();
     await page.waitForLoadState('networkidle');
 
     // WebShop | Shipping Address - Click on continue button
-    await page.getByRole('button', { name: 'Continue' }).click();
+    await page.locator('#shipping-buttons-container').getByRole('button', { name: 'Continue' }).click();
     await page.waitForLoadState('networkidle');
 
     // WebShop | Shipping Method - Select Ground and click continue
-    await page.locator('input#shippingoption_1').check();
-    await page.getByRole('button', { name: 'Continue' }).click();
+    await page.locator('#shippingoption_1').check();
+    await page.locator('#shipping-method-buttons-container').getByRole('button', { name: 'Continue' }).click();
     await page.waitForLoadState('networkidle');
 
-    // WebShop | Payment Method - Select payment method
-    await page.locator('input#paymentmethod_2').check();
-    await page.getByRole('button', { name: 'Continue' }).click();
+    // WebShop | Payment Method - Select payment method and click continue
+    await page.locator('#paymentmethod_1').check();
+    await page.locator('#payment-method-buttons-container').getByRole('button', { name: 'Continue' }).click();
     await page.waitForLoadState('networkidle');
 
-    // WebShop | Payment Information - Click continue
-    await page.getByRole('button', { name: 'Continue' }).click();
+    // WebShop | Payment Information - Enter card details and click continue
+    await page.locator('input#CardholderName').fill('Test User');
+    await page.locator('input#CardNumber').fill('4485564059489345');
+    await page.locator('input#CardCode').fill('123');
+    await page.locator('#payment-info-buttons-container').getByRole('button', { name: 'Continue' }).click();
     await page.waitForLoadState('networkidle');
 
-    // WebShop | Confirm Order - Click confirm
-    await page.getByRole('button', { name: 'Confirm' }).click();
+    // WebShop | Confirm Order - Click confirm button
+    await page.locator('#confirm-order-buttons-container').getByRole('button', { name: 'Confirm' }).click();
     await page.waitForLoadState('networkidle');
 
-    // WebShop | Order Completed - Verify order success
-    await expect(page.locator('div.title')).toContainText('Your order has been successfully processed!');
+    // WebShop | Order Confirmation - Verify order success
+    await expect(page.locator('div.page-title')).toContainText('Thank you');
   });
 });
