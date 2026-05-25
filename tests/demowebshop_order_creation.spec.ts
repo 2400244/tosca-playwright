@@ -27,10 +27,6 @@ test.describe('DemoWebShop_Order_Creation|Buiseness Parameters|RTB', () => {
     await page.waitForLoadState('domcontentloaded');
     await page.waitForLoadState('networkidle');
 
-    // TBox Set Buffer
-    const bufferData = await page.locator('a.account').textContent();
-    await page.waitForLoadState('networkidle');
-
     // WebShop | Products Choice Tab - Navigate to Products Choice Tab and click on APPAREL & SHOES
     await page.locator('a[href="/apparel-shoes"]').first().click();
     await page.waitForLoadState('networkidle');
@@ -41,7 +37,7 @@ test.describe('DemoWebShop_Order_Creation|Buiseness Parameters|RTB', () => {
 
     // WebShop | Blue Jeans - Enter the Quantity for Blue jeans and Click on add to cart (Transition)
     await page.locator('input.qty-input').fill('2');
-    await page.locator('input.button-2.add-to-cart-button').click();
+    await page.locator('#add-to-cart-button-36').click();
 
     // WebShop | Blue Jeans - Enter the Quantity for Blue jeans and Click on add to cart
     await page.locator('p.content').waitFor({ state: 'visible' });
@@ -65,23 +61,23 @@ test.describe('DemoWebShop_Order_Creation|Buiseness Parameters|RTB', () => {
     await page.locator('input.button-1.new-address-next-step-button').click();
     await page.waitForLoadState('networkidle');
 
-    // WebShop | Shipping Method - Select shipping method and continue
+    // WebShop | Shipping Method - Click on continue button
     await page.locator('input.button-1.shipping-method-next-step-button').click();
     await page.waitForLoadState('networkidle');
 
-    // WebShop | Payment Method - Select payment method and continue
+    // WebShop | Payment Method - Click on continue button
     await page.locator('input.button-1.payment-method-next-step-button').click();
     await page.waitForLoadState('networkidle');
 
-    // WebShop | Payment Information - Continue with payment
+    // WebShop | Payment Information - Click on continue button
     await page.locator('input.button-1.payment-info-next-step-button').click();
     await page.waitForLoadState('networkidle');
 
-    // WebShop | Confirm Order - Confirm the order
+    // WebShop | Confirm Order - Click on confirm button
     await page.locator('input.button-1.confirm-order-next-step-button').click();
     await page.waitForLoadState('networkidle');
 
-    // Verify order completion
+    // WebShop | Order Confirmation - Verify order completion
     await expect(page.locator('div.title')).toContainText('Your order has been successfully processed!');
   });
 });
